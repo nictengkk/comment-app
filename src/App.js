@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import CommentList from './components/CommentList/CommentList';
+import CommentList from "./components/CommentList/CommentList"
+import CommentForm from "./components/CommentForm/CommentForm"
 
 class App extends Component {
-  render() {
-    const comments = [{
+  state = {
+    comments: [
+    {
       comment: "With great power comes great responsibility",
       author: "Peter Parker"
     },
@@ -11,10 +13,13 @@ class App extends Component {
       comment: "I am going to make him an offer he can't refuse",
       author: "The Godfather"
     }
-  ]
+  ]}
+
+  render() {
     return (
       <div className="container mt-5">
-        <CommentList comments={comments}/>
+        <CommentForm handleSubmit={handleSubmit}/>
+        <CommentList comments={this.state.comments} />
       </div>
     );
   }
