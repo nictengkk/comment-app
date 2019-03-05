@@ -1,11 +1,16 @@
 import React, { Component, useState } from "react";
 
-function CommentForm() {
+function CommentForm({ handleSubmit }) {
   const [commentTextArea, setCommentTextArea] = useState("");
   const [authorInput, setAuthorInput] = useState("");
 
-  const isUnfilled = () => {
-    //if authorInput and commentTextArea has input, return false
+  const onSubmit = event => {
+    event.preventDefault();
+    handleSubmit(authorInput, commentTextArea);
+  };
+
+  const isNotFilled = () => {
+    //if authorInput and commentTextArea has input, return false. so false and false gives false, bang makes it true.
     const res = !(authorInput && commentTextArea);
     return res;
   };
@@ -20,7 +25,7 @@ function CommentForm() {
 
   const placeholderText = "Write something...";
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       <div className="form-group">
         <textarea
           onChange={handleCommentTextArea}
@@ -41,7 +46,7 @@ function CommentForm() {
           onChange={handleAuthorInput}
         />
       </div>
-      <button disabled={isUnfilled()} className="btn btn-primary">
+      <button disabled={isNotFilled()} className="btn btn-primary">
         Submit
       </button>
     </form>
