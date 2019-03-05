@@ -27,17 +27,14 @@ describe("Comment Form", () => {
     const sampleComment = "Some comment";
     const sampleAuthor = "Mary Jane";
 
-    const {
-      queryByText,
-      getByText,
-      getByLabelText,
-      getByPlaceholderText
-    } = render(<CommentForm />);
+    const { queryByText, getByLabelText, getByPlaceholderText } = render(
+      <CommentForm />
+    );
 
     const textArea = getByPlaceholderText("Write something..."); //creates the element
     const input = getByLabelText("Your Name"); //creates element
     fireEvent.change(textArea, { target: { value: sampleComment } }); // changes and fills the textArea defined with the value "some comment"
-    fireEvent.change(input, { target: { value: sampleAuthor } }); // changes and fills the textArea defined with the value "some comment"
+    fireEvent.change(input, { target: { value: sampleAuthor } }); // changes and fills the input with the value "Mary Jane"
 
     expect(queryByText("Submit")).not.toHaveAttribute("disabled");
   });
